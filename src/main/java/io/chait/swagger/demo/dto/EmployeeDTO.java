@@ -1,9 +1,11 @@
 package io.chait.swagger.demo.dto;
 
 import io.chait.swagger.demo.enums.Gender;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter@Setter
+@Builder(setterPrefix = "with")
+@AllArgsConstructor
 public class EmployeeDTO {
 
     private String name;

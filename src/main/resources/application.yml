@@ -1,13 +1,13 @@
-#keycloak:
-#  auth-server-url: http://localhost:8180/auth
-#  realm: glidecash
-#  resource: swagger-demo
-#  public-client: true
-#  bearer-only: true
-#  credentials:
-#    secret: fb652c4a-70cb-4b81-a339-fa87054f77a0
+keycloak:
+  auth-server-url: http://localhost:8180/auth
+  realm: glidecash
+  resource: swagger-demo
+  public-client: true
+  bearer-only: true
+  credentials:
+    secret: fb652c4a-70cb-4b81-a339-fa87054f77a0
 
-#swagger:
-#  auth:
-#    token-url: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/token/
-#    client-id: swagger-demo
+swagger:
+  auth:
+    token-url: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/token/
+    client-id: swagger-demo

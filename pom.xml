@@ -15,6 +15,7 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
     </properties>
     <dependencies>
         <dependency>
@@ -88,7 +89,6 @@
             <version>2.4.4</version>
         </dependency>
 
-
     </dependencies>
 
     <dependencyManagement>
@@ -119,5 +119,8 @@
             </plugin>
         </plugins>
     </build>
+
+
+
 
 </project>

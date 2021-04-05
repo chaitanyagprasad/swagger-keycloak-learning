@@ -11,13 +11,7 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger.web.SecurityConfigurationBuilder;
-
-
 import java.util.Arrays;
-
-
-
-import static springfox.documentation.builders.PathSelectors.regex;
 
 @Configuration
 @Slf4j
@@ -36,7 +30,6 @@ public class SwaggerConfig {
     private String REALM;
 
     private static final String OAUTH_NAME = "spring_oauth";
-    private static final String ALLOWED_PATHS = "src/main/java/io/chait/swagger/demo/.*";
     private static final String GROUP_NAME = "swagger-demo";
     private static final String TITLE = "API Documentation for swagger-demo Application";
     private static final String DESCRIPTION = "Description here";
@@ -49,7 +42,7 @@ public class SwaggerConfig {
                 .useDefaultResponseMessages(true)
                 .apiInfo(apiInfo())
                 .select()
-                .paths(regex(ALLOWED_PATHS))
+                .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(Arrays.asList(securityScheme()))
                 .securityContexts(Arrays.asList(securityContext()));
@@ -67,6 +60,7 @@ public class SwaggerConfig {
                 .clientId(CLIENT_ID)
                 .clientSecret(CLIENT_SECRET)
                 .appName(GROUP_NAME)
+                .useBasicAuthenticationWithAccessCodeGrant(true)
                 .scopeSeparator(" ")
                 .build();
     }
@@ -90,9 +84,9 @@ public class SwaggerConfig {
 
     private AuthorizationScope[] scopes() {
         AuthorizationScope[] scopes = {
-                new AuthorizationScope("user", "for CRUD operations"),
-                new AuthorizationScope("read", "for read operations"),
-                new AuthorizationScope("write", "for write operations")
+//                new AuthorizationScope("user", "for CRUD operations"),
+                new AuthorizationScope("READ", "for read operations")
+//                new AuthorizationScope("write", "for write operations")
         };
         return scopes;
     }
@@ -100,7 +94,7 @@ public class SwaggerConfig {
     private SecurityContext securityContext() {
         return SecurityContext.builder()
                 .securityReferences(Arrays.asList(new SecurityReference(OAUTH_NAME, scopes())))
-                .forPaths(PathSelectors.regex(ALLOWED_PATHS))
+                .forPaths(PathSelectors.any())
                 .build();
     }
 
